@@ -1,0 +1,94 @@
+
+# Name your project! Project names should contain only lowercase characters
+# and underscores. A good package name should reflect your organization's
+# name or the intended use of these models
+name: 'DBT-Glue-Project'
+version: '1.0.0'
+config-version: 2
+
+
+# This setting configures which "profile" dbt uses for this project.
+profile: 'default'
+
+# vars:
+#    target_db: GLUEDB
+#    target_schema: PUBLIC
+#    stage_name: GLUEDB.PUBLIC.GLUE_S3_STAGE
+
+vars:
+  wrk_schema: BRONZE # schema created in snowflake under bronze
+  file_format_json: MYDB.BRONZE.MY_CSV_FORMAT # file format created in snowflake
+  purge_status: FALSE
+  stage_name: MYDB.BRONZE.S3_TEST_STAGE  # stage name created in snowflake
+  rawhist_db: MYDB # database created in snowflake
+
+
+# These configurations specify where dbt should look for different types of files.
+# The `model-paths` config, for example, states that models in this project can be
+# found in the "models/" directory. You probably won't need to change these!
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+
+target-path: "target"  # directory which will store compiled SQL files
+clean-targets:         # directories to be removed by `dbt clean`
+  - "target"
+  - "dbt_packages"
+
+
+
+
+# Configuring models
+# Full documentation: https://docs.getdbt.com/docs/configuring-models
+
+
+# In dbt, the default materialization for a model is a view. This means, when you run
+# dbt run or dbt build, all of your models will be built as a view in your data platform.
+# The configuration below will override this setting for models in the example folder to
+# instead be materialized as tables. Any models you add to the root of the models folder will
+# continue to be built as views. These settings can be overridden in the individual model files
+# using the `{{ config(...) }}` macro.
+
+
+models:
+  derick_dbt_project:
+      silver:
+        +schema: silver
+        +database: MYDB
+        +materialized: table
+      gold:
+          +schema: gold
+          +database: MYDB
+          +materialized: view
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+    # Project1:
+    #   bronze:
+    #     +database: PROJECT1_DB
+    #     +schema: BRONZE
+    #   silver:
+    #     +database: PROJECT1_DB
+    #     +schema: SILVER
+    # Project2:
+    #   raw:
+    #     +database: PROJECT2_DB
+    #     +schema: RAW
+    #   mart:
+    #     +database: PROJECT2_DB
+    #     +schema: MART
+
