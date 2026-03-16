@@ -1,0 +1,182 @@
+models:
+    - name: country_details_antarctica
+      description: "dbt model to create the country details mart table for antartica continent"
+      columns:
+          - name: "(country_common_name||country_continent_name||country_currency_name)"
+            description: "The primary key combination for this table"
+            tests:
+                - unique
+                - not_null
+          - name: country_continent_name
+            description: "The column contain continent of the country"
+            tests:
+                - accepted_values:
+                    values: ['Antarctica']
+
+ 
+
+    - name: country_details_north_america
+
+      description: "dbt model to create the country details mart table for north america continent"
+
+      columns:
+
+          - name: "(country_common_name||country_continent_name||country_currency_name)"
+
+            description: "The primary key combination for this table"
+
+            tests:
+
+                - unique
+
+                - not_null
+
+          - name: country_continent_name
+
+            description: "The column contain continent of the country"
+
+            tests:
+
+                - accepted_values:
+
+                    values: ['North America']
+
+ 
+
+    - name: country_details_south_america
+
+      description: "dbt model to create the country details mart table for south america continent"
+
+      columns:
+
+          - name: "(country_common_name||country_continent_name||country_currency_name)"
+
+            description: "The primary key combination for this table"
+
+            tests:
+
+                - unique
+
+                - not_null
+
+          - name: country_continent_name
+
+            description: "The column contain continent of the country"
+
+            tests:
+
+                - accepted_values:
+
+                    values: ['South America']
+
+ 
+
+    - name: country_details_europe
+
+      description: "dbt model to create the country details mart table for europe continent"
+
+      columns:
+
+          - name: "(country_common_name||country_continent_name||country_currency_name)"
+
+            description: "The primary key combination for this table"
+
+            tests:
+
+                - unique
+
+                - not_null
+
+          - name: country_continent_name
+
+            description: "The column contain continent of the country"
+
+            tests:
+
+                - accepted_values:
+
+                    values: ['Europe']
+
+ 
+
+    - name: country_details_africa
+
+      description: "dbt model to create the country details mart table for africa continent"
+
+      columns:
+
+          - name: "(country_common_name||country_continent_name||country_currency_name)"
+
+            description: "The primary key combination for this table"
+
+            tests:
+
+                - unique
+
+                - not_null
+
+          - name: country_continent_name
+
+            description: "The column contain continent of the country"
+
+            tests:
+
+                - accepted_values:
+
+                    values: ['Africa']
+
+ 
+
+    - name: country_details_asia
+
+      description: "dbt model to create the country details mart table for asia continent"
+
+      columns:
+
+          - name: "(country_common_name||country_continent_name||country_currency_name)"
+
+            description: "The primary key combination for this table"
+
+            tests:
+
+                - unique
+
+                - not_null
+
+          - name: country_continent_name
+
+            description: "The column contain continent of the country"
+
+            tests:
+
+                - accepted_values:
+
+                    values: ['Asia']
+
+ 
+
+    - name: country_details_oceania
+
+      description: "dbt model to create the country details mart table for oceania continent"
+
+      columns:
+
+          - name: "(country_common_name||country_continent_name||country_currency_name)"
+
+            description: "The primary key combination for this table"
+
+            tests:
+
+                - unique
+
+                - not_null
+
+          - name: country_continent_name
+
+            description: "The column contain continent of the country"
+
+            tests:
+
+                - accepted_values:
+
+                    values: ['Oceania']
