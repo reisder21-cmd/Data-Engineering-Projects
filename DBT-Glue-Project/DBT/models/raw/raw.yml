@@ -1,0 +1,17 @@
+version: 2
+
+models:
+    - name: country_details_raw
+      description: "dbt model to create the country detail raw table"
+      columns:
+          - name: source_data
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+sources:
+    - name: country
+      database: GLUEDB
+      schema: PUBLIC
+      tables:
+        - name: COUNTRY_DETAILS_CP
