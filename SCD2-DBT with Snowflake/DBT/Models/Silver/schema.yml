@@ -1,1 +1,17 @@
 
+# Any sql file in silver layer will use this to generate transformed data into correct table. This 'work_product_copy' table was created in Snowflake,
+# this table will be where transformed data from bronze layer will be copied into. The only thing in bronze layer is the csv file from S3
+
+version: 2
+
+sources:
+    - name: source
+      database: MYDB
+      schema: BRONZE
+      tables:
+        - name: WORK_PRODUCT_COPY
+    - name: xfm
+      database: MYDB
+      schema: silver
+      tables:
+        - name: WORK_PRODUCT_TRANSFORM
