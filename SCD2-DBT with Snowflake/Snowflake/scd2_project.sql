@@ -1,0 +1,92 @@
+USE SCHEMA MYDB.BRONZE;
+
+CREATE STORAGE INTEGRATION S3_snowflake
+
+  TYPE = EXTERNAL_STAGE
+
+  STORAGE_PROVIDER = 'S3'
+
+  ENABLED = TRUE
+
+  STORAGE_AWS_ROLE_ARN = 'arn:aws:iam::012178638860:role/mysnowflakerole'
+
+  STORAGE_ALLOWED_LOCATIONS = ('s3://sdc2-bucket/raw_data/');
+
+  DESC INTEGRATION S3_snowflake;
+
+  
+
+  CREATE OR REPLACE FILE FORMAT MY_CSV_FORMAT
+
+  TYPE = CSV
+
+  FIELD_DELIMITER = ','
+
+  FIELD_OPTIONALLY_ENCLOSED_BY = '"'
+
+  SKIP_HEADER = 1
+
+  NULL_IF = ('NULL', 'null')
+
+  EMPTY_FIELD_AS_NULL = true;
+
+
+  CREATE OR REPLACE STAGE s3_test_stage
+
+  STORAGE_INTEGRATION = S3_snowflake
+
+  URL = 's3://sdc2-bucket/raw_data/'
+
+  FILE_FORMAT = MY_CSV_FORMAT;
+
+  ls @s3_test_stage;
+
+  
+-- This is the table that will be copied into from S3, the raw data being copied into Bronze layer.
+-- This is a transient table that DBT transform sql file will copy from stage
+CREATE OR REPLACE TABLE 
+
+ MYDB.BRONZE.WORK_PRODUCT_COPY
+
+(
+
+ PRODUCT_ID VARCHAR(255) NOT NULL COLLATE 'en-ci'
+
+,PRODUCT_NAME VARCHAR(255) NOT NULL COLLATE 'en-ci'
+
+,CATEGORY VARCHAR(255) COLLATE 'en-ci'
+
+,SELLING_PRICE VARCHAR(50) COLLATE 'en-ci'
+
+,MODEL_NUMBER VARCHAR(50) COLLATE 'en-ci'
+
+,ABOUT_PRODUCT VARCHAR(5000) COLLATE 'en-ci'
+
+,PRODUCT_SPECIFICATION VARCHAR(5000) COLLATE 'en-ci'
+
+,TECHNICAL_DETAILS VARCHAR(50000) COLLATE 'en-ci'
+
+,SHIPPING_WEIGHT VARCHAR(30) COLLATE 'en-ci'
+
+,PRODUCT_DIMENSIONS VARCHAR(100) COLLATE 'en-ci'
+
+,INSERT_DTS TIMESTAMP_NTZ(6) NOT NULL
+
+,UPDATE_DTS TIMESTAMP_NTZ(6) NOT NULL
+
+,SOURCE_FILE_NAME VARCHAR(255) NOT NULL
+
+,SOURCE_FILE_ROW_NUMBER VARCHAR(255) NOT NULL);
+
+
+
+
+SELECT * FROM MYDB.SNAPSHOTS.PRODUCT_SNAPSHOT;
+
+SELECT * FROM MYDB.GOLD.PRODUCT_VIEW;
+
+
+ -- See the final view after a change takes place in source data
+select * from MYDB.GOLD.PRODUCT_VIEW
+
+WHERE PRODUCT_ID = '4c69b61db1fc16e7013b43fc926e502d';
