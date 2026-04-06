@@ -1,0 +1,19 @@
+
+
+version: 2
+
+models:
+    - name: department_raw
+      description: "dbt model to create initial department table in bronze"
+      columns:
+          - name: DEPT_ID
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+sources:
+    - name: department_data
+      database: MYDB
+      schema: PUBLIC
+      tables:
+        - name: DIM_DEPARTMENT_RAW
