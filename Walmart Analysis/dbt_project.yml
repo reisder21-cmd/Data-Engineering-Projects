@@ -38,7 +38,7 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   walmart_analysis_project:
     # Applies to all files under models/example/
-    bronze:
+    Bronze:
       +schema: bronze
       +materialized: table
     silver:
