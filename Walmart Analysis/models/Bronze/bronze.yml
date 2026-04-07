@@ -3,27 +3,27 @@
 version: 2
 
 models:
-    - name: department_raw
+    - name: walmart_date_dim
       description: "dbt model to create initial department table in bronze"
       columns:
-          - name: "(STORE_ID||DEPT_ID)"
+          - name: "(DATE_ID)"
             description: "The primary keys for this table"
             tests:
                 - unique
                 - not_null
-    - name: store_raw
+    - name: walmart_store_dim
       description: "initial store table in bronze"
       columns:
-         - name: "(STORE_ID)"
-           description: "Primary key"
+         - name: "(STORE_ID|DEPT_ID)"
+           description: "Primary keys"
            tests: 
               - unique
               - not_null
-    - name: fact_raw
+    - name: walmart_fact_table
       description: "initial fact table"
       columns:
-        - name: "(STORE_ID)"
-          description: "Primary key"
+        - name: "(STORE_ID,DEPT_ID,DATE_ID)"
+          description: "Foreign Keys"
           tests:
             - unique
             - not_null

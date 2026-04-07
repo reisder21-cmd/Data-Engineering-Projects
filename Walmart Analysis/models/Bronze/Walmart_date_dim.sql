@@ -9,17 +9,15 @@ config
 
 
 
-WITH department_raw AS 
+WITH walmart_date_dim AS 
 (
 SELECT 
-STORE AS STORE_ID,
-DEPT AS DEPT_ID,
+TO_CHAR(DATE, '%Y-%m-%d') AS DATE_ID,
 DATE,
-WEEKLY_SALES,
 ISHOLIDAY,
 CURRENT_TIMESTAMP(6) AS INSERT_DATE,
-CURRENT_TIMESTAMP(6) AS UPDDATE_DATE
+CURRENT_TIMESTAMP(6) AS UPDATE_DATE
 FROM {{source('department_data','DIM_DEPARTMENT_RAW')}}
 )
 
-SELECT * FROM department_raw
+SELECT * FROM walmart_date_dim

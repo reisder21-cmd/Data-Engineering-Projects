@@ -1,0 +1,15 @@
+# version: 2
+
+# sources:
+#   - name: bronze_data
+#     database: MYDB
+#     schema: BRONZE
+#     tables:
+#       - name: DEPARTMENT_RAW
+#       - name: STORE_RAW
+#       - name: FACT_RAW
+#   - name: transform_data
+#     database: MYDB
+#     schema: SILVER
+#     tables:
+#       - name: STORE_DATA_TRANSFORM
