@@ -1,15 +1,16 @@
-# version: 2
+version: 2
 
-# sources:
-#   - name: bronze_data
-#     database: MYDB
-#     schema: BRONZE
-#     tables:
-#       - name: DEPARTMENT_RAW
-#       - name: STORE_RAW
-#       - name: FACT_RAW
-#   - name: transform_data
-#     database: MYDB
-#     schema: SILVER
-#     tables:
-#       - name: STORE_DATA_TRANSFORM
+sources:
+  - name: bronze_data
+    database: MYDB
+    schema: BRONZE
+    tables:
+      - name: DEPARTMENT_RAW
+      - name: STORES_RAW
+      - name: FACT_RAW
+  - name: transform
+    database: MYDB
+    schema: silver
+    tables:
+      - name: walmart_date_dim
+      - name: walmart_store_dim

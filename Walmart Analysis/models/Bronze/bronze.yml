@@ -1,47 +1,47 @@
 
 
-version: 2
+# version: 2
 
-models:
-    - name: walmart_date_dim
-      description: "dbt model to create initial department table in bronze"
-      columns:
-          - name: "(DATE_ID)"
-            description: "The primary keys for this table"
-            tests:
-                - unique
-                - not_null
-    - name: walmart_store_dim
-      description: "initial store table in bronze"
-      columns:
-         - name: "(STORE_ID|DEPT_ID)"
-           description: "Primary keys"
-           tests: 
-              - unique
-              - not_null
-    - name: walmart_fact_table
-      description: "initial fact table"
-      columns:
-        - name: "(STORE_ID,DEPT_ID,DATE_ID)"
-          description: "Foreign Keys"
-          tests:
-            - unique
-            - not_null
+# models:
+#     - name: department_raw_csv
+#       description: "dbt model to create initial department table in bronze"
+#       columns:
+#           - name: "(DATE)"
+#             description: "The primary key will be used to create date_ID for next table, make sure it is unique and not null"
+#             tests:
+#                 - unique
+#                 - not_null
+#     - name: store_raw_csv
+#       description: "initial store table in bronze"
+#       columns:
+#          - name: "(STORE|DEPT)"
+#            description: "Primary keys"
+#            tests: 
+#               - unique
+#               - not_null
+    # - name: fact_raw_csv
+    #   description: "initial fact table"
+    #   columns:
+    #     - name: "(STORE_ID,DEPT_ID,DATE_ID)"
+    #       description: "Foreign Keys"
+    #       tests:
+    #         - unique
+    #         - not_null
 
 
-sources:
-    - name: department_data
-      database: MYDB
-      schema: PUBLIC
-      tables:
-        - name: DIM_DEPARTMENT_RAW
-    - name: store_data
-      database: MYDB
-      schema: PUBLIC
-      tables:
-        - name: DIM_STORES_RAW
-    - name: fact_data
-      database: MYDB
-      schema: PUBLIC
-      tables:
-        - name: FACT_RAW
+# sources:
+#     - name: department_data_raw
+#       database: MYDB
+#       schema: BRONZE
+#       tables:
+#         - name: DEPARTMENT_RAW
+#     - name: store_data_raw
+#       database: MYDB
+#       schema: BRONZE
+#       tables:
+#         - name: STORES_RAW
+#     - name: fact_data
+#       database: MYDB
+#       schema: BRONZE
+#       tables:
+#         - name: FACT_RAW

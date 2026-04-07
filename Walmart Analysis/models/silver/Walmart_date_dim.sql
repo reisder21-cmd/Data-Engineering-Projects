@@ -1,10 +1,4 @@
-{{
-config
-({
-"materialized":'table',
-"schema": 'BRONZE'
-})
-}}
+
 
 
 
@@ -17,7 +11,7 @@ DATE,
 ISHOLIDAY,
 CURRENT_TIMESTAMP(6) AS INSERT_DATE,
 CURRENT_TIMESTAMP(6) AS UPDATE_DATE
-FROM {{source('department_data','DIM_DEPARTMENT_RAW')}}
+FROM {{source('bronze_data','DEPARTMENT_RAW')}}
 )
 
 SELECT * FROM walmart_date_dim

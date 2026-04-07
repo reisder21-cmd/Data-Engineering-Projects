@@ -1,23 +1,17 @@
-{{
-config
-({
-"materialized":'table',
-"schema": 'BRONZE'
-})
-}}
+
 
 WITH store AS (
     SELECT
     STORE AS STORE_ID,
     TYPE AS STORE_TYPE,
     SIZE AS STORE_SIZE
-    FROM {{source('store_data','DIM_STORES_RAW')}}
+    FROM {{source('bronze_data','STORES_RAW')}}
 ),
 dept AS (
     SELECT
     STORE AS STORE_ID,
     DEPT AS DEPT_ID
-    FROM {{source('department_data','DIM_DEPARTMENT_RAW')}}
+    FROM {{source('bronze_data','DEPARTMENT_RAW')}}
 )
 
 SELECT
