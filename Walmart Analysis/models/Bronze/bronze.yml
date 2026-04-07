@@ -19,6 +19,14 @@ models:
            tests: 
               - unique
               - not_null
+    - name: fact_raw
+      description: "initial fact table"
+      columns:
+        - name: "(STORE_ID)"
+          description: "Primary key"
+          tests:
+            - unique
+            - not_null
 
 
 sources:
@@ -32,3 +40,8 @@ sources:
       schema: PUBLIC
       tables:
         - name: DIM_STORES_RAW
+    - name: fact_data
+      database: MYDB
+      schema: PUBLIC
+      tables:
+        - name: FACT_RAW
