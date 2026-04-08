@@ -1,0 +1,12 @@
+
+
+WITH store AS (
+    SELECT
+    STORE AS STORE_ID,
+    TYPE AS STORE_TYPE,
+    SIZE AS STORE_SIZE,
+    CURRENT_TIMESTAMP(6) AS INSERT_DATE
+    FROM {{source('bronze_data','STORES_RAW')}}
+)
+
+SELECT * FROM store

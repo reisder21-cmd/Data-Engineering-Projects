@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: dim_walmart_date
+    columns:
+      - name: ROW_NUM
+        tests:
+          - unique
+          - not_null
+  - name: dim_walmart_store
+    columns:
+      - name: STORE_ID
+        tests:
+          - unique
+          - not_null

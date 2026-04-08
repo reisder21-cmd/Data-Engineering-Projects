@@ -1,5 +1,6 @@
 version: 2
 
+
 sources:
   - name: bronze_data
     database: MYDB
@@ -8,9 +9,3 @@ sources:
       - name: DEPARTMENT_RAW
       - name: STORES_RAW
       - name: FACT_RAW
-  - name: transform
-    database: MYDB
-    schema: silver
-    tables:
-      - name: walmart_date_dim
-      - name: walmart_store_dim
