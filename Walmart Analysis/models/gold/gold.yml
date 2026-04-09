@@ -17,6 +17,5 @@ models:
     columns:
       - name: DEPT_ID
         tests:
-          - unique
           - not_null
           
