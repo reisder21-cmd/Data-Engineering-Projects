@@ -1,8 +1,8 @@
 WITH raw_fact AS (
     SELECT
         STORE AS STORE_ID,
-        DATE AS DATE,
-        TEMPERATURE AS STORE_TEMERATURE,
+        TO_CHAR(DATE, '%Y-%m-%d') AS DATE_ID,
+        TEMPERATURE,
         FUEL_PRICE,
         MARKDOWN1,
         MARKDOWN2,

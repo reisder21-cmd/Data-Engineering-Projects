@@ -11,4 +11,4 @@ SELECT
     STORE_DATE,
     ISHOLIDAY,
     CURRENT_TIMESTAMP(6) AS UPDATE_DATE
-FROM {{ ref('stage_dept_date') }}
+FROM {{ ref('stage_dept') }}
