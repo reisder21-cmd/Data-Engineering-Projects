@@ -13,3 +13,10 @@ models:
         tests:
           - unique
           - not_null
+  - name: dim_department
+    columns:
+      - name: DEPT_ID
+        tests:
+          - unique
+          - not_null
+          
