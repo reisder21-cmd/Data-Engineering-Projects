@@ -1,3 +1,5 @@
+-- SCD1
+
 {{ config(
     materialized='incremental',
     unique_key='ROW_NUM'

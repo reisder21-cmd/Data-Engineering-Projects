@@ -1,3 +1,5 @@
+-- SCD1
+
 {{ config(
     materialized='incremental',
     unique_key='STORE_ID'
