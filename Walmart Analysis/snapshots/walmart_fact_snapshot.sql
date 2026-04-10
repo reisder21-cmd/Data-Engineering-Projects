@@ -24,6 +24,6 @@ SELECT
         'DATE_ID'
     ]) }} AS COMPOSITE_KEY
 
-FROM {{ ref('fact_data') }}
+FROM {{ ref('combined_tables_fact') }}
 
 {% endsnapshot %}
