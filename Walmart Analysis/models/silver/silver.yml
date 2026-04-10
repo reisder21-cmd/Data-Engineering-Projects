@@ -1,0 +1,11 @@
+version: 2
+
+
+sources:
+  - name: bronze_data
+    database: MYDB
+    schema: BRONZE
+    tables:
+      - name: DEPARTMENT_RAW
+      - name: STORES_RAW
+      - name: FACT_RAW
