@@ -1,0 +1,5 @@
+models:
+  - name: combined_tables_fact
+    tests:
+      - unique:
+          column_name: "(store_id || '-' || dept_id || '-' || date_id)"
