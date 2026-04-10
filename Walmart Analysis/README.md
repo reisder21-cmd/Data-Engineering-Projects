@@ -1,15 +1,8 @@
-Welcome to your new dbt project!
+## Walmart Analysis Project
 
-### Using the starter project
-
-Try running the following commands:
-- dbt run
-- dbt test
-
-
-### Resources:
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [dbt community](https://getdbt.com/community) to learn from other analytics engineers
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+#### 1. Three raw csv files from S3 bucket are ingested into tables in snowflake bronze schema.
+#### 2. In DBT, staging is completed in Silver layer to clean any data from Bronze. 
+#### 3. For SCD1, 2 dim tables are created in gold layer from the staging tables in silver
+#### 4. For SCD2, an intermediate table was created in silver layer to join other tables to get all data that was required for final fact table. 
+#### 5. Continuing with SCD2 configuration, a snapshot file was created using a surrogate key to track changes
+#### 6. Final fact table in gold layer, references the snapshot to track changes to fact table
