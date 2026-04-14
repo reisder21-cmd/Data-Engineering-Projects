@@ -6,3 +6,4 @@
 #### 4. For SCD2, an intermediate table was created in silver layer to join other tables to get all data that was required for final fact table. 
 #### 5. Continuing with SCD2 configuration, a snapshot file was created using a surrogate key to track changes
 #### 6. Final fact table in gold layer, references the snapshot to track changes to fact table
+#### 7. With the final data in gold layer, I was able to create dashboards using Tableau. Look under Dashboards to see document with dashboards.
