@@ -1,0 +1,63 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "S3BucketLevel",
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket",
+                "s3:GetBucketLocation"
+            ],
+            "Resource": [
+                "arn:aws:s3:::nh-202604-bronze",
+                "arn:aws:s3:::nh-202604-silver",
+                "arn:aws:s3:::nh-202604-gold",
+                "arn:aws:s3:::nh-glue-assets/*",
+                "arn:aws:s3:::nhdea-athena-results"
+            ]
+        },
+        {
+            "Sid": "S3ObjectLevel",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:PutObject",
+                "s3:DeleteObject",
+                "s3:AbortMultipartUpload"
+            ],
+            "Resource": [
+                "arn:aws:s3:::nh-202604-bronze/*",
+                "arn:aws:s3:::nh-202604-silver/*",
+                "arn:aws:s3:::nh-202604-gold/*",
+                "arn:aws:s3:::nh-glue-assets/*",
+                "arn:aws:s3:::nhdea-athena-results/*"
+            ]
+        },
+        {
+            "Sid": "SecretsManagerRead",
+            "Effect": "Allow",
+            "Action": [
+                "secretsmanager:GetSecretValue"
+            ],
+            "Resource": "arn:aws:secretsmanager:us-east-1:012178638860:secret:nh/google-drive/service-account-*"
+        },
+        {
+            "Sid": "SSMParameterStore",
+            "Effect": "Allow",
+            "Action": [
+                "ssm:GetParameter",
+                "ssm:GetParameters",
+                "ssm:PutParameter"
+            ],
+            "Resource": "arn:aws:ssm:us-east-1:012178638860:parameter/nh/*"
+        },
+        {
+            "Sid": "SNSPublish",
+            "Effect": "Allow",
+            "Action": [
+                "sns:Publish"
+            ],
+            "Resource": "arn:aws:sns:us-east-1:012178638860:nh-staffing-pipeline-alerts"
+        }
+    ]
+}
