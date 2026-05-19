@@ -1,1 +1,45 @@
 
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "S3BucketLevel",
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket",
+                "s3:GetBucketLocation",
+                "glue:PassConnection"
+            ],
+            "Resource": [
+                "arn:aws:s3:::gbp-202605-bronze",
+                "arn:aws:s3:::gbp-202605-silver",
+                "arn:aws:s3:::gbp-202605-gold",
+                "arn:aws:s3:::gbp-athena-queries/*"
+            ]
+        },
+        {
+            "Sid": "S3ObjectLevel",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:PutObject",
+                "s3:DeleteObject",
+                "s3:AbortMultipartUpload"
+            ],
+            "Resource": [
+                "arn:aws:s3:::gbp-202605-bronze/*",
+                "arn:aws:s3:::gbp-202605-silver/*",
+                "arn:aws:s3:::gbp-202605-gold/*",
+                "arn:aws:s3:::gbp-athena-queries/*"
+            ]
+        },
+        {
+            "Sid": "SecretsManagerRead",
+            "Effect": "Allow",
+            "Action": [
+                "secretsmanager:GetSecretValue"
+            ],
+            "Resource": "arn:aws:secretsmanager:us-east-1:012178638860:secret:global_partners_db-xEESxu"
+        }
+    ]
+}
