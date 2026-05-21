@@ -7,7 +7,8 @@ from awsglue.job import Job
 
 # Step 1 import the functions
 from pyspark.sql.functions import (
-    col,countDistinct, count, sum as spark_sum, min as spark_min, max as spark_max, when, percent_rank
+    col,countDistinct, count, sum as spark_sum, min as spark_min, max as spark_max, when, percent_rank,
+    trim, length, lit
 )
 from pyspark.sql.window import Window
 
@@ -23,8 +24,31 @@ job.init(args['JOB_NAME'], args)
 # Step 2 Read initial gold table
 fact = spark.read.parquet("s3://gbp-202605-gold/fact_order_items/")
 
+# Create a rule to drop erroneous users that don't make sense
+
+flag_check = fact.groupBy("user_id", "is_loyalty").agg(
+  count("*").alias("row_count"),
+  countDistinct("restaurant_id").alias("restaurant_count")
+)
+
+suspicious = flag_check.filter(
+  (col("is_loyalty") == False) &
+  ((col("row_count") > 500)|(col('restaurant_count') > 5))
+).select("user_id").withColumn("drop_false_rows", lit(True))
+
+fact_cleaned = fact.join(suspicious, "user_id", "left")
+fact_cleaned = fact_cleaned.filter(
+    ~(col("drop_false_rows").isNotNull() & (col("is_loyalty") == False))
+)
+
+
+
 # Step 3 Only get non-null values for user_id
-fact_attributed = fact.filter(col("user_id").isNotNull())
+fact_attributed = fact_cleaned.filter(col("user_id").isNotNull() &
+                  (length(trim(col("user_id"))) > 0)
+)
+
+
 
 # Step 4 get it to one row per customer
 customer_summary = fact_attributed.groupBy("user_id").agg(
